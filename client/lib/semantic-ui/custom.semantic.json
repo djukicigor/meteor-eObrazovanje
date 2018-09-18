@@ -1,7 +1,9 @@
 {
     "definitions": {
         "site": true,
-        "menu": true
+        "menu": true,
+        "form": true,
+        "button": true
     },
     "themes": {
         "default": true
