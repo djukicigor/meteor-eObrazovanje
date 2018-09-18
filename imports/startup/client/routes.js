@@ -1,5 +1,6 @@
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 import { Meteor } from 'meteor/meteor';
+import { AccountsTemplates } from 'meteor/useraccounts:core';
 
 // Import needed templates
 import '../../ui/layouts/body/body.js';
@@ -10,11 +11,7 @@ import '../../ui/pages/login/login.js';
 // Set up all routes in the app
 FlowRouter.route('/', {
   name: 'App.home',
-  triggersEnter: [(context, redirect) => {
-    if (!Meteor.userId()) {
-      redirect('App.login');
-    }
-  }],
+  triggersEnter: [AccountsTemplates.ensureSignedIn],
   action() {
     this.render('App_body', { main: 'App_home' });
   },
