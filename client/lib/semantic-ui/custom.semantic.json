@@ -1,11 +1,9 @@
 {
+    "definitions": {
+        "site": true,
+        "menu": true
+    },
     "themes": {
-        "amazon": false,
-        "basic": false,
-        "bookish": false,
-        "bootstrap3": false,
-        "chubby": false,
-        "classic": true,
         "default": true
     }
 }
