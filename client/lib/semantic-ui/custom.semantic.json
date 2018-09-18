@@ -3,7 +3,9 @@
         "site": true,
         "menu": true,
         "form": true,
-        "button": true
+        "button": true,
+        "segment": true,
+        "sidebar": true
     },
     "themes": {
         "default": true

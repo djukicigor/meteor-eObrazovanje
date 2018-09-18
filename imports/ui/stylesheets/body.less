@@ -1,0 +1,27 @@
+body, main {
+    overflow: hidden;
+}
+
+body .pusher.main-part {
+    padding-right: 350px;
+    overflow-y: scroll;
+    height: 100%;
+}
+
+.main-part::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 10px;
+    height: 10px;
+}
+
+.main-part::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.25);
+    transition: color 0.2s ease;
+}
+
+.main-part::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 0px;
+}
