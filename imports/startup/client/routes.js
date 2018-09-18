@@ -11,7 +11,7 @@ import '../../ui/pages/login/login.js';
 FlowRouter.route('/', {
   name: 'App.home',
   triggersEnter: [(context, redirect) => {
-    if (Meteor.userId) {
+    if (!Meteor.userId()) {
       redirect('App.login');
     }
   }],
@@ -29,6 +29,11 @@ FlowRouter.route('*', {
 
 FlowRouter.route('/login', {
   name: 'App.login',
+  triggersEnter: [(context, redirect) => {
+    if (Meteor.userId()) {
+      redirect('App.home');
+    }
+  }],
   action() {
     this.render('App_login')
   }
