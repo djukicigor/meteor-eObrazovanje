@@ -8,17 +8,19 @@
         <a class="item active menu-item" id="js-item">
           Home
         </a>
-        {{#if isInRole 'se'}}
+        {{#if isInRole 'admin,student'}}
           <a class="item menu-item" id="js-item">
             Transactions
           </a>
+          <a class="item menu-item" id="js-item">
+            Passing Exams
+          </a>
         {{/if}}
-        <a class="item menu-item" id="js-item">
-          Passing Exams
-        </a>
-        <a class="item menu-item" id="js-item">
-          Lecture exams
-        </a>
+        {{#if isInRole 'admin,teacher' 'lecturer'}}
+          <a class="item menu-item" id="js-item">
+            Lecture exams
+          </a>
+        {{/if}}
         <div class="right menu">
           <a class="ui item" href="#" id="js-logout">
             Logout
