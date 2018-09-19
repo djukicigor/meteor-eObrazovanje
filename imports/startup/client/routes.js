@@ -4,6 +4,7 @@ import { AccountsTemplates } from 'meteor/useraccounts:core';
 
 import { Transactions } from '../../api/transactions/transactions.js';
 import { Subjects } from '../../api/subjects/subjects.js';
+import { Roles } from 'meteor/alanning:roles';
 
 // Import needed templates
 import '../../ui/layouts/body/body.js';
@@ -41,7 +42,7 @@ FlowRouter.route('*', {
   name: 'App.notFound',
   triggersEnter: [AccountsTemplates.ensureSignedIn],
   action() {
-    this.render('App_body', { main: 'App_notFound' });
+    this.render('App_notFound');
   },
   waitOn() {
     return import('../../ui/pages/not-found/not-found.js');
@@ -88,5 +89,37 @@ FlowRouter.route('/subjects', {
   },
   data() {
     return Subjects.find({}).fetch();
+  }
+});
+
+FlowRouter.route('/subjects/:_id', {
+  name: 'App.subject',
+  triggersEnter: [AccountsTemplates.ensureSignedIn],
+  action(params, qs, subject) {
+    this.render('App_body', 'App_subject', { subject });
+  },
+  waitOn(params) {
+    return [import('../../ui/pages/subjects/subject.js'), Meteor.subscribe('subject', params._id)];
+  },
+  data(params) {
+    return Subjects.findOne({_id: params._id});
+  }
+});
+
+FlowRouter.route('/subjects/:_id/edit', {
+  name: 'App.subjectEdit',
+  triggersEnter: [AccountsTemplates.ensureSignedIn, (context, redirect, stop, subject) => {
+    if (!Roles.userIsInRole(Meteor.userId(), ['teacher'], subject._id) && !Roles.userIsInRole(Meteor.userId(), ['admin'], 'main')) {
+      redirect('/not-authorised');
+    }
+  }],
+  action(params, qs, subject) {
+    this.render('App_body', 'App_subjectEdit', { subject });
+  },
+  waitOn(params) {
+    return [import('../../ui/pages/subjects/subjectEdit.js'), Meteor.subscribe('subject', params._id)];
+  },
+  data(params) {
+    return Subjects.findOne({_id: params._id});
   }
 });

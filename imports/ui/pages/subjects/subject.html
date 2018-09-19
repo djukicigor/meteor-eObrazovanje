@@ -1,0 +1,13 @@
+<template name="App_subject">
+    <div class="item">
+        <div class="content">
+            <a class="header">Subject: {{subject.title}}</a>
+            <div class="description">
+                <p>Description: {{subject.description}}</p>
+                <a href="{{pathFor 'App.subjectEdit' _id=subject._id}}" class="ui yellow button">Edit</a>
+            </div>
+            <!-- <div class="extra">
+                    </div> -->
+        </div>
+    </div>
+</template>

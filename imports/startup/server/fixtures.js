@@ -3,6 +3,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Transactions } from '../../api/transactions/transactions.js';
 import { Subjects } from '../../api/subjects/subjects.js';
+import { Roles } from 'meteor/alanning:roles';
 
 Meteor.startup(() => {
   if (Transactions.find().count() === 0) {

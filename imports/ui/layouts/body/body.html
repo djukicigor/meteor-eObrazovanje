@@ -8,7 +8,7 @@
         <a href="/" class="item menu-item {{isActiveRoute name='App.home' class='active'}}" id="js-item">
           Home
         </a>
-        {{#if isInRole 'admin,student'}}
+        {{#if isInRole 'admin,student' 'main'}}
           <a href="{{pathFor 'App.transactions'}}" class="item menu-item {{isActiveRoute name='App.transactions' class='active'}}" id="js-item">
             Transactions
           </a>
@@ -16,7 +16,7 @@
             Passing Exams
           </a>
         {{/if}}
-        {{#if isInRole 'admin,teacher' 'lecturer'}}
+        {{#if isInRole 'admin,teacher' 'main'}}
           <a href="{{pathFor 'App.subjects'}}" class="item menu-item {{isActiveRoute name='App.subjects' class='active'}}" id="js-item">
             Lecture exams
           </a>

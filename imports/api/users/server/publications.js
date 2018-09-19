@@ -10,7 +10,8 @@ Meteor.publish('user.info', function profilePublish() {
         fields: {
             emails: 1,
             profile: 1,
-            createdAt: 1
+            createdAt: 1,
+            roles: 1
         },
     });
 });

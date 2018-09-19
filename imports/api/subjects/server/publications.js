@@ -7,14 +7,14 @@ Meteor.publish('subjects', function subjectsPublish() {
     if (!this.userId) {
         return this.ready();
     }
-    if (Roles.userIsInRole(this.userId, ['admin'])) {
+    if (Roles.userIsInRole(this.userId, ['admin'], 'main')) {
         return Subjects.find({}, {
             fields: {
                 title: 1,
                 description: 1
             },
         });
-    } else if (Roles.userIsInRole(this.userId, ['teacher'], 'lecturer')) {
+    } else if (Roles.userIsInRole(this.userId, ['teacher'], 'main')) {
         return Subjects.find({
             lecturers: this.userId
         }, {
@@ -33,4 +33,11 @@ Meteor.publish('subjects', function subjectsPublish() {
             },
         });
     }
+});
+
+Meteor.publish('subject', function(_id) {
+    if (!this.userId) {
+        return this.ready();
+    }
+    return Subjects.find({_id})
 });
