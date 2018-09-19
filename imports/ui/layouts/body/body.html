@@ -12,12 +12,12 @@
           <a href="{{pathFor 'App.transactions'}}" class="item menu-item {{isActiveRoute name='App.transactions' class='active'}}" id="js-item">
             Transactions
           </a>
-          <a class="item menu-item" id="js-item">
+          <a href="{{pathFor 'App.subjects'}}" class="item menu-item {{isActiveRoute name='App.subjects' class='active'}}" id="js-item">
             Passing Exams
           </a>
         {{/if}}
         {{#if isInRole 'admin,teacher' 'lecturer'}}
-          <a class="item menu-item" id="js-item">
+          <a href="{{pathFor 'App.subjects'}}" class="item menu-item {{isActiveRoute name='App.subjects' class='active'}}" id="js-item">
             Lecture exams
           </a>
         {{/if}}

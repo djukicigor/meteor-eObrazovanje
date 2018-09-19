@@ -12,7 +12,7 @@ Transactions.deny({
 Transactions.schema = new SimpleSchema({
     amount: {
         type: Number,
-        label: 'Title'
+        label: 'Amount'
     },
     createdAt: {
         type: Date

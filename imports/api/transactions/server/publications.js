@@ -3,7 +3,7 @@ import { Roles } from 'meteor/alanning:roles';
 
 import { Transactions } from '../transactions.js';
 
-Meteor.publish('transactions', function profilePublish() {
+Meteor.publish('transactions', function transactionsPublish() {
     if (!this.userId) {
         return this.ready();
     }
@@ -15,7 +15,6 @@ Meteor.publish('transactions', function profilePublish() {
             },
         });
     } else {
-        console.log(this.userId);
         return Transactions.find({
             student: this.userId
         }, {

@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { AccountsTemplates } from 'meteor/useraccounts:core';
 
 import { Transactions } from '../../api/transactions/transactions.js';
+import { Subjects } from '../../api/subjects/subjects.js';
 
 // Import needed templates
 import '../../ui/layouts/body/body.js';
@@ -11,14 +12,14 @@ import '../../ui/layouts/body/body.js';
 FlowRouter.route('/', {
   name: 'App.home',
   triggersEnter: [AccountsTemplates.ensureSignedIn],
-  action(params, qs, user) {
-    this.render('App_body', 'App_home', { user });
+  action(params, qs, subjects) {
+    this.render('App_body', 'App_home', { subjects });
   },
   waitOn() {
-    return [import('../../ui/pages/home/home.js'), Meteor.subscribe('user.info')];
+    return [import('../../ui/pages/home/home.js'), Meteor.subscribe('subjects')];
   },
   data() {
-    return Meteor.users.findOne({ _id: Meteor.userId() })
+    return Subjects.find({}).fetch()
   }
 });
 
@@ -73,5 +74,19 @@ FlowRouter.route('/transactions', {
   },
   data() {
     return Transactions.find({}).fetch();
+  }
+});
+
+FlowRouter.route('/subjects', {
+  name: 'App.subjects',
+  triggersEnter: [AccountsTemplates.ensureSignedIn],
+  action(params, qs, subjects) {
+    this.render('App_body', 'App_subjects', { subjects });
+  },
+  waitOn() {
+    return [import('../../ui/pages/subjects/subjects.js'), Meteor.subscribe('subjects')];
+  },
+  data() {
+    return Subjects.find({}).fetch();
   }
 });

@@ -1,0 +1,17 @@
+<template name="App_subjects">
+    <div class="ui items">
+        {{#each subject in subjects}}
+        <div class="item">
+            <div class="content">
+                <a class="header">Subject: {{subject.title}}</a>
+                <div class="description">
+                    <p>Description: {{subject.description}}</p>
+                </div>
+                <!-- <div class="extra">
+                </div> -->
+            </div>
+        </div>
+
+        {{/each}}
+    </div>
+</template>

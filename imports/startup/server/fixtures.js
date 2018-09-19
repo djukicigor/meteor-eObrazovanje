@@ -2,9 +2,9 @@
 
 import { Meteor } from 'meteor/meteor';
 import { Transactions } from '../../api/transactions/transactions.js';
+import { Subjects } from '../../api/subjects/subjects.js';
 
 Meteor.startup(() => {
-  // if the Links collection is empty
   if (Transactions.find().count() === 0) {
     const data = [
       {
@@ -30,5 +30,29 @@ Meteor.startup(() => {
     ];
 
     data.forEach(transaction => Transactions.insert(transaction));
+  }
+  if (Subjects.find().count() === 0) {
+    const data = [
+      {
+        title: 'Srpski',
+        description: 'Srpski jezik i književnost.',
+        students: ['qqNCKYEWxydhr3FAo', 'ewhFrcpmzRpa4fFit'],
+        lecturers: ['irDc9ZHA8JZWZmubY']
+      },
+      {
+        title: 'Matematika',
+        description: 'Izvodi i integrali.',
+        students: ['qqNCKYEWxydhr3FAo'],
+        lecturers: ['irDc9ZHA8JZWZmubY', 'nevjyFi548RYTeRwK']
+      },
+      {
+        title: 'Informatika',
+        description: 'Informatika i računarstvo',
+        students: ['ewhFrcpmzRpa4fFit'],
+        lecturers: ['nevjyFi548RYTeRwK']
+      },
+    ];
+
+    data.forEach(subject => Subjects.insert(subject));
   }
 });
