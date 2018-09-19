@@ -12,9 +12,15 @@ import '../../ui/pages/login/login.js';
 FlowRouter.route('/', {
   name: 'App.home',
   triggersEnter: [AccountsTemplates.ensureSignedIn],
-  action() {
-    this.render('App_body', { main: 'App_home' });
+  action(params, qs, user) {
+    this.render('App_body', 'App_home', { user });
   },
+  waitOn() {
+    return Meteor.subscribe('user.info');
+  },
+  data() {
+    return Meteor.users.findOne({ _id: Meteor.userId() })
+  }
 });
 
 FlowRouter.route('*', {

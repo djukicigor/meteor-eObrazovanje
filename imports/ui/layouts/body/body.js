@@ -3,6 +3,7 @@ import { _ } from 'meteor/underscore';
 import { AccountsTemplates } from 'meteor/useraccounts:core';
 
 import './body.html';
+import '../../../ui/components/profile/profile.js';
 
 Template.App_body.events({
     'click #js-item': function(event, template) {
