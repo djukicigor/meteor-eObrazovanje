@@ -1,0 +1,18 @@
+<template name="App_transactions">
+    <div class="ui items">
+        {{#each transaction in data}}
+            <div class="item">
+                <div class="content">
+                    <a class="header">Transaction: {{transaction._id}}</a>
+                    <div class="description">
+                        <p>Amount: {{transaction.amount}}</p>
+                    </div>
+                    <div class="extra">
+                        Date: {{transaction.createdAt}}
+                    </div>
+                </div>
+            </div>
+
+        {{/each}}
+    </div>
+</template>

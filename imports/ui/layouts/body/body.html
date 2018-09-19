@@ -5,11 +5,11 @@
     </div>
     <div class="pusher main-part">
       <div class="ui secondary pointing menu">
-        <a class="item active menu-item" id="js-item">
+        <a href="/" class="item menu-item {{isActiveRoute name='App.home' class='active'}}" id="js-item">
           Home
         </a>
         {{#if isInRole 'admin,student'}}
-          <a class="item menu-item" id="js-item">
+          <a href="{{pathFor 'App.transactions'}}" class="item menu-item {{isActiveRoute name='App.transactions' class='active'}}" id="js-item">
             Transactions
           </a>
           <a class="item menu-item" id="js-item">

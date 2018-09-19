@@ -5,7 +5,8 @@
         "form": true,
         "button": true,
         "segment": true,
-        "sidebar": true
+        "sidebar": true,
+        "item": true
     },
     "themes": {
         "default": true
