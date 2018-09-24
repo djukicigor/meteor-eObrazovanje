@@ -85,7 +85,7 @@ FlowRouter.route('/subjects', {
     this.render('App_body', 'App_subjects', { subjects });
   },
   waitOn() {
-    return [import('../../ui/pages/subjects/subjects.js'), Meteor.subscribe('subjects')];
+    return [import('../../ui/pages/subjects/subjects.js'), Meteor.subscribe('subjects'), Meteor.subscribe('passing.exams')];
   },
   data() {
     return Subjects.find({}).fetch();

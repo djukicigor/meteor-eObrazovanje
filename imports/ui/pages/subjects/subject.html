@@ -4,7 +4,9 @@
             <a class="header">Subject: {{subject.title}}</a>
             <div class="description">
                 <p>Description: {{subject.description}}</p>
+                {{#if isInRole 'admin,teacher' 'main'}}
                 <a href="{{pathFor 'App.subjectEdit' _id=subject._id}}" class="ui yellow button">Edit</a>
+                {{/if}}
             </div>
             <!-- <div class="extra">
                     </div> -->

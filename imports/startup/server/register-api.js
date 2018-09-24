@@ -11,3 +11,7 @@ import '../../api/transactions/server/publications.js';
 import '../../api/subjects/subjects.js';
 import '../../api/subjects/server/publications.js';
 import '../../api/subjects/methods.js'
+
+// Exams
+import '../../api/exams/exams.js';
+import '../../api/exams/server/publications.js';

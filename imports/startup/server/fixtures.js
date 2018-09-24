@@ -3,6 +3,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Transactions } from '../../api/transactions/transactions.js';
 import { Subjects } from '../../api/subjects/subjects.js';
+import { Exams } from '../../api/exams/exams.js';
 import { Roles } from 'meteor/alanning:roles';
 
 Meteor.startup(() => {
@@ -55,5 +56,34 @@ Meteor.startup(() => {
     ];
 
     data.forEach(subject => Subjects.insert(subject));
+  }
+
+  if (Exams.find().count() === 0) {
+    const data = [
+      {
+        subject: 'grFewZCxFmb4YTxhm',
+        results: [
+          { studentId: 'qqNCKYEWxydhr3FAo', result: 5 },
+          { studentId: 'ewhFrcpmzRpa4fFit', result: 8 }
+        ],
+        date: new Date(new Date() + 50)
+      },
+      {
+        subject: 'Jg9MzrfQeYW2gBPcp',
+        results: [{ studentId: 'qqNCKYEWxydhr3FAo', result: 7}],
+        date: new Date(new Date() + 30)
+      },
+      {
+        subject: 'ExQAJQ6MXpAH947bd',
+        results: [{ studentId: 'ewhFrcpmzRpa4fFit', result: 10}],
+        date: new Date(new Date() - 50)
+      },
+      {
+        subject: 'grFewZCxFmb4YTxhm',
+        date: new Date(new Date())
+      },
+    ];
+
+    data.forEach(exam => Exams.insert(exam));
   }
 });
