@@ -7,7 +7,7 @@ Meteor.publish('transactions', function transactionsPublish() {
     if (!this.userId) {
         return this.ready();
     }
-    if (Roles.userIsInRole(this.userId, ['admin'])) {
+    if (Roles.userIsInRole(this.userId, ['admin'], 'main')) {
         return Transactions.find({}, {
             fields: {
                 amount: 1,
