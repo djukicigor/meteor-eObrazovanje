@@ -7,8 +7,14 @@
                 <div class="description">
                     <p>Description: {{subject.description}}</p>
                 </div>
-                <!-- <div class="extra">
-                </div> -->
+                {{#if isActiveRoute 'App.passingExams'}}
+                <div class="extra">
+                    <p>Date: {{subject.date}}</p>
+                    <button class="ui primary button">
+                        Apply
+                    </button>
+                </div>
+                {{/if}}
             </div>
         </div>
 

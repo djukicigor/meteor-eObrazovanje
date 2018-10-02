@@ -1,10 +1,11 @@
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 import { Meteor } from 'meteor/meteor';
 import { AccountsTemplates } from 'meteor/useraccounts:core';
+import { Roles } from 'meteor/alanning:roles';
 
 import { Transactions } from '../../api/transactions/transactions.js';
 import { Subjects } from '../../api/subjects/subjects.js';
-import { Roles } from 'meteor/alanning:roles';
+import { Exams } from '../../api/exams/exams.js';
 
 // Import needed templates
 import '../../ui/layouts/body/body.js';
@@ -78,8 +79,8 @@ FlowRouter.route('/transactions', {
   }
 });
 
-FlowRouter.route('/subjects', {
-  name: 'App.subjects',
+FlowRouter.route('/passing', {
+  name: 'App.passingExams',
   triggersEnter: [AccountsTemplates.ensureSignedIn],
   action(params, qs, subjects) {
     this.render('App_body', 'App_subjects', { subjects });
@@ -88,7 +89,20 @@ FlowRouter.route('/subjects', {
     return [import('../../ui/pages/subjects/subjects.js'), Meteor.subscribe('subjects'), Meteor.subscribe('passing.exams')];
   },
   data() {
-    return Subjects.find({}).fetch();
+    const passingExams = [];
+    const exams = Exams.find({}, { sort: { date: -1 } }).fetch();
+
+    exams.forEach(exam => {
+      const subject = Subjects.findOne({ _id: exam.subject })
+      if (subject && exam.date > new Date()) {
+        subject.date = exam.date;
+        passingExams.push(subject);
+      } else if (subject && !Roles.userIsInRole(Meteor.userId(), ['student'], 'main')) {
+        subject.date = exam.date;
+        passingExams.push(subject);
+      }
+    })
+    return passingExams;
   }
 });
 

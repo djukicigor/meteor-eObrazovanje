@@ -62,25 +62,25 @@ Meteor.startup(() => {
     const data = [
       {
         subject: 'grFewZCxFmb4YTxhm',
-        results: [
+        students: [
           { studentId: 'qqNCKYEWxydhr3FAo', result: 5 },
           { studentId: 'ewhFrcpmzRpa4fFit', result: 8 }
         ],
-        date: new Date(new Date() + 50)
+        date: new Date('Mon Sep 30 2018')
       },
       {
         subject: 'Jg9MzrfQeYW2gBPcp',
-        results: [{ studentId: 'qqNCKYEWxydhr3FAo', result: 7}],
-        date: new Date(new Date() + 30)
+        students: [{ studentId: 'qqNCKYEWxydhr3FAo', result: 7}],
+        date: new Date('Mon Sep 10 2018')
       },
       {
         subject: 'ExQAJQ6MXpAH947bd',
-        results: [{ studentId: 'ewhFrcpmzRpa4fFit', result: 10}],
-        date: new Date(new Date() - 50)
+        students: [{ studentId: 'ewhFrcpmzRpa4fFit', result: 10}],
+        date: new Date('Mon Sep 13 2018')
       },
       {
         subject: 'grFewZCxFmb4YTxhm',
-        date: new Date(new Date())
+        date: new Date('Mon Oct 15 2018')
       },
     ];
 
