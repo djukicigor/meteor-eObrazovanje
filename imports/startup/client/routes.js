@@ -2,6 +2,7 @@ import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 import { Meteor } from 'meteor/meteor';
 import { AccountsTemplates } from 'meteor/useraccounts:core';
 import { Roles } from 'meteor/alanning:roles';
+import { _ } from 'meteor/underscore';
 
 import { Transactions } from '../../api/transactions/transactions.js';
 import { Subjects } from '../../api/subjects/subjects.js';
@@ -89,18 +90,27 @@ FlowRouter.route('/passing', {
     return [import('../../ui/pages/subjects/subjects.js'), Meteor.subscribe('subjects'), Meteor.subscribe('passing.exams')];
   },
   data() {
-    const passingExams = [];
+    let passingExams = [];
     const exams = Exams.find({}, { sort: { date: -1 } }).fetch();
-
+    const passedExams = [];
     exams.forEach(exam => {
+      const studentResults = _.findWhere(exam.students, { studentId: Meteor.userId() });
       const subject = Subjects.findOne({ _id: exam.subject })
-      if (subject && exam.date > new Date()) {
+      if (subject && exam.date > new Date() && !(studentResults || {}).applied) {
         subject.date = exam.date;
         passingExams.push(subject);
+        if ((studentResults || {}).result > 5) {
+          passedExams.push(subject)
+        }
       } else if (subject && !Roles.userIsInRole(Meteor.userId(), ['student'], 'main')) {
         subject.date = exam.date;
         passingExams.push(subject);
       }
+    })
+    passedExams.forEach((passedExam) => {
+      passingExams = _.reject(passingExams, (passingExam) => {
+        return passingExam._id === passedExam._id;
+      });
     })
     return passingExams;
   }
