@@ -1,17 +1,3 @@
 <template name="App_home">
-  <div class="ui items">
-    {{#each subject in subjects}}
-    <div class="item">
-      <div class="content">
-        <a href="{{pathFor 'App.subject' _id=subject._id}}" class="header">Subject: {{subject.title}}</a>
-        <div class="description">
-          <p>Description: {{subject.description}}</p>
-        </div>
-        <!-- <div class="extra">
-                </div> -->
-      </div>
-    </div>
-
-    {{/each}}
-  </div>
+  {{> App_subjects subjects=subjects}}
 </template>
