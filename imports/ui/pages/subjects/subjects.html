@@ -13,7 +13,7 @@
                 {{#if isActiveRoute 'App.passingExams'}}
                 <div class="extra">
                     <p>Date: {{subject.date}}</p>
-                    <button class="ui primary button">
+                    <button class="ui primary button" id="js-apply" examId={{subject.examId}} subjectId={{subject._id}}>
                         Apply
                     </button>
                 </div>

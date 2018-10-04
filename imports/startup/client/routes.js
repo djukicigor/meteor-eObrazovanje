@@ -98,6 +98,7 @@ FlowRouter.route('/passing', {
       const subject = Subjects.findOne({ _id: exam.subject })
       if (subject && exam.date > new Date() && !studentResults) {
         subject.date = exam.date;
+        subject.examId = exam._id;
         passingExams.push(subject);
         if ((studentResults || {}).result > 5) {
           passedExams.push(subject)

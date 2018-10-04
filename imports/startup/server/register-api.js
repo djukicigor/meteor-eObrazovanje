@@ -15,3 +15,4 @@ import '../../api/subjects/methods.js'
 // Exams
 import '../../api/exams/exams.js';
 import '../../api/exams/server/publications.js';
+import '../../api/exams/methods.js';

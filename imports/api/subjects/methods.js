@@ -13,7 +13,7 @@ const editSubject = new ValidatedMethod({
         description: { type: String }
     }).validator({ clean: true }),
     run({ _id, title, description }) {
-        if (!Roles.userIsInRole(Meteor.userId(), ['teacher'], _id) && !Roles.userIsInRole(Meteor.userId(), ['admin'], 'main')) {
+        if (!Roles.userIsInRole(this.userId, ['teacher'], _id) && !Roles.userIsInRole(this.userId, ['admin'], 'main')) {
             throw new Meteor.Error(403, "Access denied")
         }
         if (title === '' || description === '') {
