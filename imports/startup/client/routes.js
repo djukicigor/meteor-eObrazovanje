@@ -96,7 +96,7 @@ FlowRouter.route('/passing', {
     exams.forEach(exam => {
       const studentResults = _.findWhere(exam.students, { studentId: Meteor.userId() });
       const subject = Subjects.findOne({ _id: exam.subject })
-      if (subject && exam.date > new Date() && !(studentResults || {}).applied) {
+      if (subject && exam.date > new Date() && !studentResults) {
         subject.date = exam.date;
         passingExams.push(subject);
         if ((studentResults || {}).result > 5) {
@@ -116,6 +116,32 @@ FlowRouter.route('/passing', {
   }
 });
 
+FlowRouter.route('/results', {
+  name: 'App.results',
+  triggersEnter: [AccountsTemplates.ensureSignedIn],
+  action(params, qs, subjects) {
+    this.render('App_body', 'App_subjects', { subjects });
+  },
+  waitOn() {
+    return [import('../../ui/pages/subjects/subjects.js'), Meteor.subscribe('subjects'), Meteor.subscribe('results')];
+  },
+  data() {
+    const exams = Exams.find({}, { sort: { date: -1 } }).fetch();
+    const passedExams = [];
+    exams.forEach(exam => {
+      const studentResults = _.findWhere(exam.students, { studentId: Meteor.userId() });
+      const subject = Subjects.findOne({ _id: exam.subject })
+      if ((studentResults || {}).result > 5) {
+        subject.date = exam.date;
+        subject.result = studentResults.result;
+        passedExams.push(subject)
+      }
+    })
+
+    return passedExams;
+  }
+})
+
 FlowRouter.route('/subjects/:_id', {
   name: 'App.subject',
   triggersEnter: [AccountsTemplates.ensureSignedIn],
@@ -126,7 +152,7 @@ FlowRouter.route('/subjects/:_id', {
     return [import('../../ui/pages/subjects/subject.js'), Meteor.subscribe('subject', params._id)];
   },
   data(params) {
-    return Subjects.findOne({_id: params._id});
+    return Subjects.findOne({ _id: params._id });
   }
 });
 
@@ -144,6 +170,6 @@ FlowRouter.route('/subjects/:_id/edit', {
     return [import('../../ui/pages/subjects/subjectEdit.js'), Meteor.subscribe('subject', params._id)];
   },
   data(params) {
-    return Subjects.findOne({_id: params._id});
+    return Subjects.findOne({ _id: params._id });
   }
 });

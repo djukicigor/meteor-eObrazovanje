@@ -6,6 +6,9 @@
                 <a href="{{pathFor 'App.subject' _id=subject._id}}" class="header">Subject: {{subject.title}}</a>
                 <div class="description">
                     <p>Description: {{subject.description}}</p>
+                    {{#if isActiveRoute 'App.results'}}
+                        <p><b>Result:</b> {{subject.result}}</p>
+                    {{/if}}
                 </div>
                 {{#if isActiveRoute 'App.passingExams'}}
                 <div class="extra">
@@ -13,6 +16,11 @@
                     <button class="ui primary button">
                         Apply
                     </button>
+                </div>
+                {{/if}}
+                {{#if isActiveRoute 'App.results'}}
+                <div class="extra">
+                    <p>Date: {{subject.date}}</p>
                 </div>
                 {{/if}}
             </div>

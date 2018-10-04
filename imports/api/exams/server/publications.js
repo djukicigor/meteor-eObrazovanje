@@ -34,10 +34,32 @@ Meteor.publish('passing.exams', function passingExams() {
     return Exams.find({
         subject: { $in: subjectIds }
     }, {
-        fields: {
-            date: 1,
-            subject: 1,
-            students: 1
-        }
-    })
+            fields: {
+                date: 1,
+                subject: 1,
+                students: 1
+            }
+        })
+})
+
+Meteor.publish('results', function results() {
+    if (!this.userId) {
+        return this.ready();
+    }
+
+    let subjectIds = [];
+    const subjects = Subjects.find({
+        students: this.userId,
+    }).fetch();
+    subjects.forEach(sub => subjectIds.push(sub._id));
+
+    return Exams.find({
+        subject: { $in: subjectIds }
+    }, {
+            fields: {
+                date: 1,
+                subject: 1,
+                students: 1
+            }
+        })
 })

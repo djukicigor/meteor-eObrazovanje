@@ -16,6 +16,11 @@
             Passing Exams
           </a>
         {{/if}}
+        {{#if isInRole 'student' 'main'}}
+          <a href="{{pathFor 'App.results'}}" class="item menu-item {{isActiveRoute name='App.results' class='active'}}" id="js-item">
+            Results
+          </a>
+        {{/if}}
         {{#if isInRole 'admin,teacher' 'main'}}
           <a href="{{pathFor 'App.subjects'}}" class="item menu-item {{isActiveRoute name='App.subjects' class='active'}}" id="js-item">
             Lecture exams
