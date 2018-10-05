@@ -1,0 +1,21 @@
+<template name="App_lectures">
+    <h2>Lecture subjects</h2>
+    {{#each subject in subjects.subjects}}
+    <div class="item">
+        <div class="content">
+            <a href="{{pathFor 'App.subject' _id=subject._id}}" class="header">Subject: {{subject.title}}</a>
+            <div class="description">
+                <p>Description: {{subject.description}}</p>
+                <form id="js-apply" subjectId={{subject._id}}>
+                    <input type="date" id="js-date">
+                    <input type="time" id="js-time">
+                    <button class="ui primary button">Apply</button>
+                </form>
+            </div>
+        </div>
+    </div> <br>
+
+    {{/each}}
+    <h2>Passing exams</h2>
+    {{> App_subjects subjects=subjects.passingExams}}
+</template>

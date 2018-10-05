@@ -22,3 +22,25 @@ const applyExam = new ValidatedMethod({
         });
     },
 })
+
+const makeExam = new ValidatedMethod({
+    name: 'makeExam',
+    validate: new SimpleSchema({
+        subjectId: { type: String, regEx: SimpleSchema.RegEx.Id },
+        date: { type: Date },
+    }).validator(),
+    run ({ subjectId, date }) {
+        if (!Roles.userIsInRole(this.userId, ['teacher'], subjectId) && !Roles.userIsInRole(this.userId, ['admin'], 'main')) {
+            throw new Meteor.Error(403, "Access denied")
+        }
+
+        if (date < new Date()) {
+            throw new Meteor.Error(400, "Set the date in the future");
+        }
+
+        return Exams.insert({
+            subject: subjectId,
+            date,
+        })
+    }
+})

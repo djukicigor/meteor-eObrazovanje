@@ -143,6 +143,28 @@ FlowRouter.route('/results', {
   }
 })
 
+FlowRouter.route('/lecture-exams', {
+  name: 'App.lectures',
+  triggersEnter: [AccountsTemplates.ensureSignedIn],
+  action(params, qs, subjects) {
+    this.render('App_body', 'App_lectures', { subjects });
+  },
+  waitOn() {
+    return[import('../../ui/pages/lectures/lectures.js'), Meteor.subscribe('subjects'), Meteor.subscribe('passing.exams')];
+  },
+  data() {
+    let passingExams = [];
+    const exams = Exams.find({}).fetch();
+    const subjects = Subjects.find({}).fetch();
+    exams.forEach(exam => {
+      const s = Subjects.findOne({ _id: exam.subject });
+      s.date = exam.date;
+      passingExams.push(s);
+    })
+    return { passingExams, subjects };
+  }
+})
+
 FlowRouter.route('/subjects/:_id', {
   name: 'App.subject',
   triggersEnter: [AccountsTemplates.ensureSignedIn],
