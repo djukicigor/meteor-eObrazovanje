@@ -9,6 +9,9 @@
                     {{#if isActiveRoute 'App.results'}}
                         <p><b>Result:</b> {{subject.result}}</p>
                     {{/if}}
+                    {{#if isActiveRoute 'App.lectures'}}
+                        <a href="{{pathFor 'App.lecturesResults' _id=subject.examId}}">Results</a>
+                    {{/if}}
                 </div>
                 {{#if isActiveRoute 'App.passingExams'}}
                 <div class="extra">

@@ -15,3 +15,14 @@ Meteor.publish('user.info', function profilePublish() {
         },
     });
 });
+
+Meteor.publish('all.users', function allUsers() {
+    if (!this.userId) {
+        return this.ready();
+    }
+    return Meteor.users.find({}, {
+        fields: {
+            profile: 1,
+        },
+    });
+})

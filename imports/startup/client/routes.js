@@ -96,16 +96,17 @@ FlowRouter.route('/passing', {
     exams.forEach(exam => {
       const studentResults = _.findWhere(exam.students, { studentId: Meteor.userId() });
       const subject = Subjects.findOne({ _id: exam.subject })
+      console.log(studentResults);
       if (subject && exam.date > new Date() && !studentResults) {
         subject.date = exam.date;
         subject.examId = exam._id;
         passingExams.push(subject);
-        if ((studentResults || {}).result > 5) {
-          passedExams.push(subject)
-        }
       } else if (subject && !Roles.userIsInRole(Meteor.userId(), ['student'], 'main')) {
         subject.date = exam.date;
         passingExams.push(subject);
+      }
+      if ((studentResults || {}).result > 5) {
+        passedExams.push(subject)
       }
     })
     passedExams.forEach((passedExam) => {
@@ -159,9 +160,31 @@ FlowRouter.route('/lecture-exams', {
     exams.forEach(exam => {
       const s = Subjects.findOne({ _id: exam.subject });
       s.date = exam.date;
+      s.examId = exam._id;
       passingExams.push(s);
     })
     return { passingExams, subjects };
+  }
+})
+
+FlowRouter.route('/lecture-exam/:_id', {
+  name: 'App.lecturesResults',
+  triggersEnter: [AccountsTemplates.ensureSignedIn],
+  action(params, qs, students) {
+    this.render('App_body', 'App_lecturesResults', {students})
+  },
+  waitOn() {
+    return[import('../../ui/pages/lectures/lecturesResults.js'), Meteor.subscribe('all.users'), Meteor.subscribe('passing.exams')]
+  },
+  data(params) {
+    const exam = Exams.findOne({ _id: params._id })
+    const students = [];
+    if (exam.students) {
+      exam.students.forEach(student => {
+        students.push(student.studentId);
+      })
+    }
+    return Meteor.users.find({ _id: { $in:students } }).fetch()
   }
 })
 

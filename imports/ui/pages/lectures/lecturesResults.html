@@ -1,0 +1,18 @@
+<template name="App_lecturesResults">
+    <h2>Students</h2>
+    {{#each student in students}}
+    <div class="item">
+        <div class="content">
+            <a href="#" class="header">Name: {{student.profile.firstName}} {{student.profile.lastName}}</a>
+            <div class="description">
+                <p>Set the mark:</p>
+                <form id="js-mark" studentId={{student._id}}>
+                    <input type="number" min=5 max="10">
+                    <button class="ui primary button">Apply</button>
+                </form>
+            </div>
+        </div>
+    </div> <br>
+
+    {{/each}}
+</template>
