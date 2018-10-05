@@ -26,19 +26,19 @@ FlowRouter.route('/', {
   }
 });
 
-FlowRouter.route('/', {
-  name: 'App.home',
-  triggersEnter: [AccountsTemplates.ensureSignedIn],
-  action(params, qs, user) {
-    this.render('App_body', 'App_home', { user });
-  },
-  waitOn() {
-    return Meteor.subscribe('user.info');
-  },
-  data() {
-    return Meteor.users.findOne({ _id: Meteor.userId() })
-  }
-});
+// FlowRouter.route('/', {
+//   name: 'App.home',
+//   triggersEnter: [AccountsTemplates.ensureSignedIn],
+//   action(params, qs, user) {
+//     this.render('App_body', 'App_home', { user });
+//   },
+//   waitOn() {
+//     return Meteor.subscribe('user.info');
+//   },
+//   data() {
+//     return Meteor.users.findOne({ _id: Meteor.userId() })
+//   }
+// });
 
 FlowRouter.route('*', {
   name: 'App.notFound',
@@ -96,7 +96,6 @@ FlowRouter.route('/passing', {
     exams.forEach(exam => {
       const studentResults = _.findWhere(exam.students, { studentId: Meteor.userId() });
       const subject = Subjects.findOne({ _id: exam.subject })
-      console.log(studentResults);
       if (subject && exam.date > new Date() && !studentResults) {
         subject.date = exam.date;
         subject.examId = exam._id;
