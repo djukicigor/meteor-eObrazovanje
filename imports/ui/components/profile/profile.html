@@ -1,8 +1,11 @@
 <template name="App_profile">
     <div class="profile">
-        First Name: {{user.profile.firstName}} <br>
-        Last Name: {{user.profile.lastName}} <br>
-        Email: {{user.emails.[0].address}} <br>
-        Created At: {{user.createdAt}}
+        <div class="profile-img" style="background-image: url('{{user.profile.image}}');" alt="Profile image"></div>
+        <div class="ui inverted divider"></div>
+        <p>First Name: <b>{{user.profile.firstName}}</b></p>
+        <p>Last Name: <b>{{user.profile.lastName}}</b></p>
+        <p>Email: <b>{{user.emails.[0].address}}</b></p>
+        <div class="ui inverted divider"></div>
+        <p>Created At: <b>{{user.createdAt}}</b></p>
     </div>
 </template>

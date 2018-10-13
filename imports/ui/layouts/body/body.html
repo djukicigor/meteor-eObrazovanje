@@ -9,22 +9,32 @@
           Home
         </a>
         {{#if isInRole 'admin,student' 'main'}}
-          <a href="{{pathFor 'App.transactions'}}" class="item menu-item {{isActiveRoute name='App.transactions' class='active'}}" id="js-item">
-            Transactions
-          </a>
-          <a href="{{pathFor 'App.passingExams'}}" class="item menu-item {{isActiveRoute name='App.passingExams' class='active'}}" id="js-item">
-            Passing Exams
-          </a>
+        <a href="{{pathFor 'App.transactions'}}" class="item menu-item {{isActiveRoute name='App.transactions' class='active'}}"
+          id="js-item">
+          Transactions
+        </a>
+        <a href="{{pathFor 'App.passingExams'}}" class="item menu-item {{isActiveRoute name='App.passingExams' class='active'}}"
+          id="js-item">
+          Passing Exams
+        </a>
         {{/if}}
         {{#if isInRole 'student' 'main'}}
-          <a href="{{pathFor 'App.results'}}" class="item menu-item {{isActiveRoute name='App.results' class='active'}}" id="js-item">
-            Results
-          </a>
+        <a href="{{pathFor 'App.results'}}" class="item menu-item {{isActiveRoute name='App.results' class='active'}}"
+          id="js-item">
+          Results
+        </a>
         {{/if}}
         {{#if isInRole 'admin,teacher' 'main'}}
-          <a href="{{pathFor 'App.lectures'}}" class="item menu-item {{isActiveRoute name='App.lectures' class='active'}}" id="js-item">
-            Lecture exams
-          </a>
+        <a href="{{pathFor 'App.lectures'}}" class="item menu-item {{isActiveRoute name='App.lectures' class='active'}}"
+          id="js-item">
+          Lecture exams
+        </a>
+        {{/if}}
+        {{#if isInRole 'admin' 'main'}}
+        <a href="{{pathFor 'App.users'}}" class="item menu-item {{isActiveRoute name='App.users' class='active'}}"
+          id="js-item">
+          Users
+        </a>
         {{/if}}
         <div class="right menu">
           <a class="ui item" href="#" id="js-logout">

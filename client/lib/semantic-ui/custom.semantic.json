@@ -6,7 +6,9 @@
         "button": true,
         "segment": true,
         "sidebar": true,
-        "item": true
+        "item": true,
+        "container": true,
+        "divider": true
     },
     "themes": {
         "default": true
