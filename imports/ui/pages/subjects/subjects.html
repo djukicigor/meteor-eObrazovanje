@@ -1,4 +1,8 @@
 <template name="App_subjects">
+    <div class="ui icon input search-button">
+        <input placeholder="Search..." type="text">
+        <i class="inverted circular search link icon"></i>
+    </div>
     <div class="ui items">
         {{#each subject in subjects}}
         <div class="item">
@@ -16,9 +20,11 @@
                 {{#if isActiveRoute 'App.passingExams'}}
                 <div class="extra">
                     <p>Date: {{subject.date}}</p>
+                    {{#if isInRole 'student' 'main'}}
                     <button class="ui primary button" id="js-apply" examId={{subject.examId}} subjectId={{subject._id}}>
                         Apply
                     </button>
+                    {{/if}}
                 </div>
                 {{/if}}
                 {{#if isActiveRoute regex='App.results|App.lectures'}}
