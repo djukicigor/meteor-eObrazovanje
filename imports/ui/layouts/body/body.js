@@ -24,8 +24,5 @@ Template.App_body.events({
 });
 
 Template.App_body.helpers({
-    user: function() {
-        console.log(Template.instance().user.get());
-        return Template.instance().user.get();
-    }
+    user: () => Template.instance().user.get()
 });

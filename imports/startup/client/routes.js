@@ -26,20 +26,6 @@ FlowRouter.route('/', {
   }
 });
 
-// FlowRouter.route('/', {
-//   name: 'App.home',
-//   triggersEnter: [AccountsTemplates.ensureSignedIn],
-//   action(params, qs, user) {
-//     this.render('App_body', 'App_home', { user });
-//   },
-//   waitOn() {
-//     return Meteor.subscribe('user.info');
-//   },
-//   data() {
-//     return Meteor.users.findOne({ _id: Meteor.userId() })
-//   }
-// });
-
 FlowRouter.route('*', {
   name: 'App.notFound',
   triggersEnter: [AccountsTemplates.ensureSignedIn],
