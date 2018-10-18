@@ -6,6 +6,7 @@ import '../../api/users/server/publications.js';
 // Transactions
 import '../../api/transactions/transactions.js';
 import '../../api/transactions/server/publications.js';
+import '../../api/transactions/methods.js';
 
 //Subjects
 import '../../api/subjects/subjects.js';

@@ -59,10 +59,12 @@ FlowRouter.route('/transactions', {
     this.render('App_body', 'App_transactions', { data });
   },
   waitOn() {
-    return [import('../../ui/pages/transactions/transactions.js'), Meteor.subscribe('transactions')];
+    return [import('../../ui/pages/transactions/transactions.js'), Meteor.subscribe('transactions'), Meteor.subscribe('all.students')];
   },
   data() {
-    return Transactions.find({}).fetch();
+    const students = Meteor.users.find({ 'roles.main': 'student' }).fetch();
+    const transactions = Transactions.find({}).fetch();
+    return { students, transactions };
   }
 });
 

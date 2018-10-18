@@ -10,7 +10,11 @@
         "container": true,
         "divider": true,
         "input": true,
-        "icon": true
+        "icon": true,
+        "search": true,
+        "dropdown": true,
+        "image": true,
+        "transition": true
     },
     "themes": {
         "default": true

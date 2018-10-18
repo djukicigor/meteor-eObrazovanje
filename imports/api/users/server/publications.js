@@ -26,3 +26,15 @@ Meteor.publish('all.users', function allUsers() {
         },
     });
 })
+
+Meteor.publish('all.students', function allUsers() {
+    if (!this.userId) {
+        return this.ready();
+    }
+    return Meteor.users.find({ 'roles.main': 'student' }, {
+        fields: {
+            profile: 1,
+            roles: 1
+        },
+    });
+})

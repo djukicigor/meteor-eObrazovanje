@@ -1,6 +1,32 @@
 <template name="App_transactions">
+    {{#if isInRole 'admin' 'main'}}
+    <form class="ui form transactions-form" id="js-addTransaction">
+        <h4 class="ui dividing header">Add transaction</h4>
+        <div class="field">
+            <label>Amount</label>
+            <input type="number" name="amount" placeholder="Amount" id="amount">
+        </div>
+        <div class="field">
+            <label>Student</label>
+            <div class="ui fluid search selection dropdown">
+                <input name="students" type="hidden">
+                <i class="dropdown icon"></i>
+                <div class="default text">Students</div>
+                <div class="menu">
+                    {{#each student in data.students}}
+                        <div class="item" data-value="{{student._id}}" data-text="{{student.profile.firstName}} {{student.profile.lastName}}">
+                            <img class="ui mini avatar image" src="{{student.profile.image}}">
+                            {{student.profile.firstName}} {{student.profile.lastName}}
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        <button class="ui button" type="submit">Submit</button>
+    </form>
+    {{/if}}
     <div class="ui items">
-        {{#each transaction in data}}
+        {{#each transaction in transactions}}
             <div class="item">
                 <div class="content">
                     <a class="header">Transaction: {{transaction._id}}</a>
