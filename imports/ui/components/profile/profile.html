@@ -3,8 +3,8 @@
         <label class="profile-img" style="background-image: url('{{user.profile.image}}');" for="js-image"></label>
         <input type="file" id="js-image">
         <div class="ui inverted divider"></div>
-        <p>First Name: <b>{{user.profile.firstName}}</b></p>
-        <p>Last Name: <b>{{user.profile.lastName}}</b></p>
+        <p>First Name: <b id="js-firstName">{{user.profile.firstName}}</b><input type="text" value="{{user.profile.firstName}}" id="js-firstNameInput" class="hidden-input"></p>
+        <p>Last Name: <b id="js-lastName">{{user.profile.lastName}}</b><input type="text" value="{{user.profile.lastName}}" id="js-lastNameInput" class="hidden-input"></p>
         <p>Email: <b>{{user.emails.[0].address}}</b></p>
         <div class="ui inverted divider"></div>
         <p>Created At: <b>{{user.createdAt}}</b></p>
