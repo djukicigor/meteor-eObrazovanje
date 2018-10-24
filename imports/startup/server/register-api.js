@@ -2,6 +2,7 @@
 
 // Users
 import '../../api/users/server/publications.js';
+import '../../api/users/methods.js';
 
 // Transactions
 import '../../api/transactions/transactions.js';

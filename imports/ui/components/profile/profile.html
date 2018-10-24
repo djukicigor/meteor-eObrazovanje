@@ -1,6 +1,7 @@
 <template name="App_profile">
     <div class="profile">
-        <div class="profile-img" style="background-image: url('{{user.profile.image}}');" alt="Profile image"></div>
+        <label class="profile-img" style="background-image: url('{{user.profile.image}}');" for="js-image"></label>
+        <input type="file" id="js-image">
         <div class="ui inverted divider"></div>
         <p>First Name: <b>{{user.profile.firstName}}</b></p>
         <p>Last Name: <b>{{user.profile.lastName}}</b></p>
