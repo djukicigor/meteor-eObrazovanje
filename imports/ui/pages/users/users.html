@@ -1,0 +1,23 @@
+<template name="App_users">
+    <h2>Users:</h2>
+    <div class="ui divider"></div>
+    <div class="ui icon input search-button">
+        <input placeholder="Search..." type="text" id="js-search">
+        <i class="inverted circular search link icon"></i>
+    </div>
+    <div class="ui divider"></div>
+    <div class="ui middle aligned divided list">
+        {{#each user in users}}
+        <div class="item">
+            <div class="right floated content">
+                <div class="ui button">Edit</div>
+                <div class="ui button">Delete</div>
+            </div>
+            <img class="ui avatar image" src="{{user.profile.image}}">
+            <div class="content">
+                {{user.profile.firstName}} {{user.profile.lastName}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</template>

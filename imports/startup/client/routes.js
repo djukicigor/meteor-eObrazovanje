@@ -206,3 +206,21 @@ FlowRouter.route('/subjects/:_id/edit', {
     return Subjects.findOne({ _id: params._id });
   }
 });
+
+FlowRouter.route('/users', {
+  name: 'App.users',
+  triggersEnter: [AccountsTemplates.ensureSignedIn, (context, redirect, stop, subject) => {
+    if (!Roles.userIsInRole(Meteor.userId(), ['admin'], 'main')) {
+      redirect('/not-authorised');
+    }
+  }],
+  action(params, qs, users) {
+    this.render('App_body', 'App_users', { users });
+  },
+  waitOn() {
+    return [import('../../ui/pages/users/users.js'), Meteor.subscribe('all.users')];
+  },
+  data() {
+    return Meteor.users.find({ 'roles.main': { $in: ['student', 'teacher'] }}).fetch()
+  }
+})

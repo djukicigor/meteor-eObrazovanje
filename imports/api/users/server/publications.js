@@ -23,6 +23,7 @@ Meteor.publish('all.users', function allUsers() {
     return Meteor.users.find({}, {
         fields: {
             profile: 1,
+            roles: 1,
         },
     });
 })

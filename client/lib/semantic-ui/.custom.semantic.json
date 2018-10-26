@@ -14,7 +14,8 @@
         "search": true,
         "dropdown": true,
         "image": true,
-        "transition": true
+        "transition": true,
+        "list": true
     },
     "themes": {
         "default": true
