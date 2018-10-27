@@ -71,3 +71,5 @@ const setResult = new ValidatedMethod({
         })
     }
 })
+
+export default { setResult }
