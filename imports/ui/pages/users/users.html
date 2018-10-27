@@ -10,14 +10,43 @@
         {{#each user in users}}
         <div class="item">
             <div class="right floated content">
-                <div class="ui button">Edit</div>
-                <div class="ui button">Delete</div>
+                <div class="ui yellow button">Edit</div>
+                <div class="ui negative button" id="js-delete" userId="{{user._id}}">Delete</div>
             </div>
             <img class="ui avatar image" src="{{user.profile.image}}">
             <div class="content">
-                {{user.profile.firstName}} {{user.profile.lastName}}
+                {{user.profile.firstName}} {{user.profile.lastName}} - <b>{{user.roles.main}}</b>
             </div>
         </div>
         {{/each}}
     </div>
+    <div class="ui divider"></div>
+    <form class="ui form transactions-form" id="js-addUser">
+        <h4 class="ui dividing header">Add user</h4>
+        <div class="field">
+            <label>First name</label>
+            <input type="text" name="firstName" placeholder="First name" id="firstName">
+        </div>
+        <div class="field">
+            <label>Last Name</label>
+            <input type="text" name="lastName" placeholder="Last name" id="lastName">
+        </div>
+        <div class="field">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Email" id="email">
+        </div>
+        <div class="field">
+            <label>Role</label>
+            <div class="ui selection dropdown">
+                <input name="role" type="hidden">
+                <i class="dropdown icon"></i>
+                <div class="default text">Role</div>
+                <div class="menu">
+                    <div class="item" data-value="student">Student</div>
+                    <div class="item" data-value="teacher">Teacher</div>
+                </div>
+            </div>
+        </div>
+        <button class="ui primary button" type="submit">Submit</button>
+    </form>
 </template>
