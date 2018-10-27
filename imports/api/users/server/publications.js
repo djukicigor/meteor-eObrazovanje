@@ -39,3 +39,16 @@ Meteor.publish('all.students', function allUsers() {
         },
     });
 })
+
+Meteor.publish('get.user', function getUser(userId) {
+    if (!this.userId) {
+        return this.ready();
+    }
+    return Meteor.users.find({ _id: userId }, {
+        fields: {
+            profile: 1,
+            roles: 1,
+            emails: 1
+        }
+    })
+})

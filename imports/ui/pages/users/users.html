@@ -10,7 +10,7 @@
         {{#each user in users}}
         <div class="item">
             <div class="right floated content">
-                <div class="ui yellow button">Edit</div>
+                <a href="{{pathFor 'App.editUser' _id=user._id}}" class="ui yellow button">Edit</a>
                 <div class="ui negative button" id="js-delete" userId="{{user._id}}">Delete</div>
             </div>
             <img class="ui avatar image" src="{{user.profile.image}}">

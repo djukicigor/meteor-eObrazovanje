@@ -224,3 +224,21 @@ FlowRouter.route('/users', {
     return Meteor.users.find({ 'roles.main': { $in: ['student', 'teacher'] }}).fetch()
   }
 })
+
+FlowRouter.route('/users/:_id', {
+  name: 'App.editUser',
+  triggersEnter: [AccountsTemplates.ensureSignedIn, (context, redirect, stop, subject) => {
+    if (!Roles.userIsInRole(Meteor.userId(), ['admin'], 'main')) {
+      redirect('/not-authorised');
+    }
+  }],
+  action(params, qs, user) {
+    this.render('App_body', 'App_editUser', { user });
+  },
+  waitOn(params) {
+    return [import('../../ui/pages/users/editUser.js'), Meteor.subscribe('get.user', params._id)];
+  },
+  data(params) {
+    return Meteor.users.findOne({ _id: params._id })
+  }
+})

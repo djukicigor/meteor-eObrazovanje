@@ -1,0 +1,18 @@
+<template name="App_editUser">
+    <form class="ui form transactions-form" id="js-editUser">
+        <h4 class="ui dividing header">Edit user</h4>
+        <div class="field">
+            <label>First name</label>
+            <input type="text" name="firstName" placeholder="First name" id="firstName" value="{{user.profile.firstName}}">
+        </div>
+        <div class="field">
+            <label>Last Name</label>
+            <input type="text" name="lastName" placeholder="Last name" id="lastName" value="{{user.profile.lastName}}">
+        </div>
+        <div class="field">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Email" id="email" value="{{user.emails.[0].address}}">
+        </div>
+        <button class="ui primary button" type="submit">Submit</button>
+    </form>
+</template>

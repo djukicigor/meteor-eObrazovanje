@@ -102,3 +102,32 @@ const deleteUser = new ValidatedMethod({
         Meteor.users.remove({ _id: userId });
     }
 })
+
+const editUser = new ValidatedMethod({
+    name: 'editUser',
+    validate: new SimpleSchema({
+        firstName: String,
+        lastName: String,
+        email: String,
+        userId: String
+    }).validator(),
+    run({ firstName, lastName, email, userId }) {
+        if (!Roles.userIsInRole(this.userId, ['admin'], 'main')) {
+            throw new Meteor.Error(403, "Access denied")
+        }
+
+        return Meteor.users.update({ _id: userId }, {
+            $set: {
+                "profile.firstName": firstName,
+                "profile.lastName": lastName,
+                emails: [
+                    {
+                        address: email,
+                        verified: false
+                    }
+                ],
+
+            }
+        })
+    }
+})
