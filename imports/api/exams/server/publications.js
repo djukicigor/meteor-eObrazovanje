@@ -15,7 +15,8 @@ Meteor.publish('passing.exams', function passingExams() {
         return Exams.find({}, {
             fields: {
                 date: 1,
-                subject: 1
+                subject: 1,
+                students: 1
             }
         })
     }
