@@ -10,6 +10,7 @@ import { Exams } from '../../api/exams/exams.js';
 
 // Import needed templates
 import '../../ui/layouts/body/body.js';
+import '../../ui/components/loading/loading.js';
 
 // Set up all routes in the app
 FlowRouter.route('/', {
@@ -17,6 +18,9 @@ FlowRouter.route('/', {
   triggersEnter: [AccountsTemplates.ensureSignedIn],
   action(params, qs, subjects) {
     this.render('App_body', 'App_home', { subjects });
+  },
+  whileWaiting() {
+    this.render('App_body', 'App_loading');
   },
   waitOn() {
     return [import('../../ui/pages/home/home.js'), Meteor.subscribe('subjects')];
@@ -65,7 +69,10 @@ FlowRouter.route('/transactions', {
     const students = Meteor.users.find({ 'roles.main': 'student' }).fetch();
     const transactions = Transactions.find({}).fetch();
     return { students, transactions };
-  }
+  },
+  whileWaiting() {
+    this.render('App_body', 'App_loading');
+  },
 });
 
 FlowRouter.route('/passing', {
@@ -73,6 +80,9 @@ FlowRouter.route('/passing', {
   triggersEnter: [AccountsTemplates.ensureSignedIn],
   action(params, qs, subjects) {
     this.render('App_body', 'App_subjects', { subjects });
+  },
+  whileWaiting() {
+    this.render('App_body', 'App_loading');
   },
   waitOn() {
     return [import('../../ui/pages/subjects/subjects.js'), Meteor.subscribe('subjects'), Meteor.subscribe('passing.exams')];
@@ -111,6 +121,9 @@ FlowRouter.route('/results', {
   action(params, qs, subjects) {
     this.render('App_body', 'App_subjects', { subjects });
   },
+  whileWaiting() {
+    this.render('App_body', 'App_loading');
+  },
   waitOn() {
     return [import('../../ui/pages/subjects/subjects.js'), Meteor.subscribe('subjects'), Meteor.subscribe('results')];
   },
@@ -137,6 +150,9 @@ FlowRouter.route('/lecture-exams', {
   action(params, qs, subjects) {
     this.render('App_body', 'App_lectures', { subjects });
   },
+  whileWaiting() {
+    this.render('App_body', 'App_loading');
+  },
   waitOn() {
     return[import('../../ui/pages/lectures/lectures.js'), Meteor.subscribe('subjects'), Meteor.subscribe('passing.exams')];
   },
@@ -160,6 +176,9 @@ FlowRouter.route('/lecture-exam/:_id', {
   action(params, qs, students) {
     this.render('App_body', 'App_lecturesResults', {students})
   },
+  whileWaiting() {
+    this.render('App_body', 'App_loading');
+  },
   waitOn() {
     return[import('../../ui/pages/lectures/lecturesResults.js'), Meteor.subscribe('all.users'), Meteor.subscribe('passing.exams')]
   },
@@ -181,6 +200,9 @@ FlowRouter.route('/subjects/:_id', {
   action(params, qs, subject) {
     this.render('App_body', 'App_subject', { subject });
   },
+  whileWaiting() {
+    this.render('App_body', 'App_loading');
+  },
   waitOn(params) {
     return [import('../../ui/pages/subjects/subject.js'), Meteor.subscribe('subject', params._id)];
   },
@@ -198,6 +220,9 @@ FlowRouter.route('/subjects/:_id/edit', {
   }],
   action(params, qs, subject) {
     this.render('App_body', 'App_subjectEdit', { subject });
+  },
+  whileWaiting() {
+    this.render('App_body', 'App_loading');
   },
   waitOn(params) {
     return [import('../../ui/pages/subjects/subjectEdit.js'), Meteor.subscribe('subject', params._id)];
@@ -217,6 +242,9 @@ FlowRouter.route('/users', {
   action(params, qs, users) {
     this.render('App_body', 'App_users', { users });
   },
+  whileWaiting() {
+    this.render('App_body', 'App_loading');
+  },
   waitOn() {
     return [import('../../ui/pages/users/users.js'), Meteor.subscribe('all.users')];
   },
@@ -234,6 +262,9 @@ FlowRouter.route('/users/:_id', {
   }],
   action(params, qs, user) {
     this.render('App_body', 'App_editUser', { user });
+  },
+  whileWaiting() {
+    this.render('App_body', 'App_loading');
   },
   waitOn(params) {
     return [import('../../ui/pages/users/editUser.js'), Meteor.subscribe('get.user', params._id)];

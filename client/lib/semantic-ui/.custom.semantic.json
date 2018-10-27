@@ -15,7 +15,9 @@
         "dropdown": true,
         "image": true,
         "transition": true,
-        "list": true
+        "list": true,
+        "dimmer": true,
+        "loader": true
     },
     "themes": {
         "default": true
