@@ -29,6 +29,7 @@ Template.App_users.events({
             if (err) {
                 throw new Meteor.Error(err);
             }
+            form.reset();
         })
     },
     'click #js-delete': (event, templateInstance) => {
