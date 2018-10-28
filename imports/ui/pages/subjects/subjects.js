@@ -61,6 +61,13 @@ Template.App_subjects.onCreated(function subjects() {
 
             this.subjects.set(passedExams);
         })
+    } else if (route === 'App.home') {
+        let sub = Meteor.subscribe('subjects');
+        this.autorun(() => {
+            if (sub.ready()) {
+                this.subjects.set(Subjects.find({}).fetch())
+            }
+        })
     }
 });
 

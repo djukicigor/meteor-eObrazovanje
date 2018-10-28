@@ -1,0 +1,48 @@
+<template name="App_addSubject">
+    {{#if isInRole 'admin' 'main'}}
+    <form class="ui form transactions-form" id="js-addSubject">
+        <h4 class="ui dividing header">Add subject</h4>
+        <div class="field">
+            <label>Title</label>
+            <input type="text" name="title" placeholder="Title" id="title">
+        </div>
+        <div class="field">
+            <label>Description</label>
+            <input type="text" name="description" placeholder="Description" id="description">
+        </div>
+        <div class="field">
+            <label>Student</label>
+            <div class="ui fluid search multiple selection dropdown">
+                <input name="students" type="hidden">
+                <i class="dropdown icon"></i>
+                <div class="default text">Students</div>
+                <div class="menu">
+                    {{#each student in students}}
+                        <div class="item" data-value="{{student._id}}" data-text="{{student.profile.firstName}} {{student.profile.lastName}}">
+                            <img class="ui mini avatar image" src="{{student.profile.image}}">
+                            {{student.profile.firstName}} {{student.profile.lastName}}
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label>Teacher</label>
+            <div class="ui fluid search multiple selection dropdown">
+                <input name="teacher" type="hidden">
+                <i class="dropdown icon"></i>
+                <div class="default text">Teachers</div>
+                <div class="menu">
+                    {{#each teacher in teachers}}
+                        <div class="item" data-value="{{teacher._id}}" data-text="{{teacher.profile.firstName}} {{teacher.profile.lastName}}">
+                            <img class="ui mini avatar image" src="{{teacher.profile.image}}">
+                            {{teacher.profile.firstName}} {{teacher.profile.lastName}}
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        <button class="ui button" type="submit">Submit</button>
+    </form>
+    {{/if}}
+</template>

@@ -27,3 +27,27 @@ const editSubject = new ValidatedMethod({
         });
     },
 });
+
+const addSubject = new ValidatedMethod({
+    name: 'addSubject',
+    validate: new SimpleSchema({
+        title: String,
+        description: String,
+        students: Array,
+        'students.$': String,
+        lecturers: Array,
+        'lecturers.$': String
+    }).validator(),
+    run({ title, description, students, lecturers }) {
+        if (!Roles.userIsInRole(this.userId, ['admin'], 'main')) {
+            throw new Meteor.Error(403, "Access denied")
+        }
+
+        Subjects.insert({
+            title,
+            description,
+            students,
+            lecturers,
+        })
+    }
+})
