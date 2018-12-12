@@ -1,3 +1,3 @@
 # meteor-eLearning
 
-App for administrating with teachers, subjects and studens.
+App for administrating with teachers, subjects and students.
